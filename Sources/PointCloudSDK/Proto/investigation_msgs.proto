@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package ars.v1;
+
+import "base_msgs.proto";
+
+enum InvestControlType {
+  MAPPING_START = 0;
+  MAPPING_STOP = 1;
+  MAPPING_RESET = 2;
+  DENSITY_LOW = 4;
+  DENSITY_MIDDLE = 5;
+  DENSITY_HIGH = 6;
+  FILE_DELETE = 7;
+  RECODE_START = 8;
+  RECODE_STOP = 9;  
+  RECODE_MARK_POINT = 10;
+}
+
+
+enum StatusValue {
+  NO_RECORDING = 0;
+  RECODING = 1;
+}
+
+enum RecordControlStatus{
+  RECORD_STATUS_RESERVE = 0;
+  RECORD_FAILED = 1;
+  RECORD_SUCCESS = 2;
+}
+
+message RecordStatus{
+  StatusValue value = 1;
+}
+
+
+message InvestControl {
+  Header header = 1;
+  InvestControlType cmd =2;
+  string name =3;
+}
+
+message RecordControlRes {
+  RecordControlStatus status = 1;
+}
+
+message SetMotorVelParam {
+  Header header = 1;
+  int32 value = 2;
+}

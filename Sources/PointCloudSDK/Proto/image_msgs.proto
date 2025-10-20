@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ars.v1;
+
+import "base_msgs.proto";
+
+message ImageTransimitControl {
+  Header header = 1;
+  bool cmd = 2;
+  int32 quality = 3;
+};
+
+message ImageData {
+  Header header = 1;
+  string data = 2;
+}

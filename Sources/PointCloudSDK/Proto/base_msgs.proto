@@ -1,0 +1,142 @@
+syntax = "proto3";
+
+package ars.v1;
+
+enum MessageType {
+  ACK = 0;
+  NOTIFY = 1;  
+}
+
+enum NavigationStatus {
+  IDLE = 0;
+  MAPPING = 1;
+  LOCATION = 2;
+}
+
+enum DiskExistStatus {
+  INEXISTENCE = 0;
+  EXIST = 1;
+}
+
+message BasicString{
+  string data = 1;
+}
+
+message Vec3 {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message Quaternion {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+  double w = 4;
+}
+
+message Pose {
+  Vec3 position = 1;
+  Quaternion orientation = 2;
+}
+
+message Twist {
+  double linear = 1;
+  double angular = 2;
+}
+
+
+message Header {
+  double seq = 1;
+  int64 timestamp = 2;
+  MessageType type = 3;
+}
+
+
+message PointCloud {
+  Header header = 1;
+  bytes data = 2;
+}
+
+message ImuData{
+  float acc_x = 1;
+  float acc_y = 2;
+  float acc_z = 3;
+  float gyro_x = 4;
+  float gyro_y = 5;
+  float gyro_z = 6;
+}
+
+
+message BaseStatus{
+  float cpu_usage = 1;
+  float memory_usage = 2;
+  DiskExistStatus disk_exist = 3;
+  float disk_usage = 4;
+  Pose  current_pose = 5;
+  Twist current_twist = 6;
+  NavigationStatus navigation_status = 7;
+  int32 motor_vel = 8;
+  bool cam_is_connect = 9;
+}
+
+message PointField {
+  string name = 1;
+  uint32 offset = 2;
+  uint32 datatype = 3;
+  uint32 count = 4;
+}
+
+message PointCloudLite {
+	uint32 seq = 1;
+	uint64 stamp = 2;
+	string frame_id = 3;
+	uint32 width = 4;
+	uint32 height = 5;
+	bool is_dense = 6;
+	bool is_bigendian = 7;
+	uint32 point_step = 8;
+	uint32 row_step = 9;
+	repeated PointField fields = 10;
+	bytes data = 11;
+}
+
+message OdometryLite {
+	uint32 seq = 1;
+	uint64 stamp = 2;
+	string frame_id = 3;
+	string child_frame_id = 4;
+	double pos_x = 5;
+	double pos_y = 6;
+	double pos_z = 7;
+	double ori_x = 8;
+	double ori_y = 9;
+	double ori_z = 10;
+	double ori_w = 11;
+	double linear_x = 12;
+	double linear_y = 13;
+	double linear_z = 14;
+	double angular_x = 15;
+	double angular_y = 16;
+	double angular_z = 17;
+}
+
+message SetControlParam {
+  Header header = 1;
+  int32 code = 2;
+}
+
+message Response {
+  Header header = 1;
+  int32 code = 2;
+  string reason = 3;
+}
+
+message Status {
+  int32 controlstatus = 1;
+}
+
+message ShootResponse {
+  bool is_hdr = 1;
+  int32 status = 2;
+}
