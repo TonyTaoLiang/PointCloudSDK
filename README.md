@@ -1,4 +1,4 @@
-# PointCloudSDKNew
+# PointCloudSDK
 A point cloud processing SDK for iOS
 
 
