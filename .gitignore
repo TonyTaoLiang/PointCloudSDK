@@ -1,0 +1,17 @@
+*.xcframework/
+*.xcframework.zip
+build/
+*.xcarchive/
+DerivedData/
+
+.DS_Store
+*.swp
+*.swo
+
+.swiftpm/
+.build/
+
+
+*.xccheckout
+xcuserdata/
+
